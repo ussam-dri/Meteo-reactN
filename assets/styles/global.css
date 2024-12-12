@@ -11,3 +11,60 @@ body {
 * * * {
 	border: 1px solid rgb(0, 0, 0);
 }
+
+@layer base {
+	:root {
+		--background: 40.75 100% 97.15%;
+		--foreground: 0 0% 6.15%;
+		--muted: 47.55 0% 93.85%;
+		--muted-foreground: 0 0% 20.77%;
+		--popover: 0 58% 97%;
+		--popover-foreground: 0 68% 4%;
+		--card: 285.28 100% 95.61%;
+		--card-foreground: 276.23 94.04% 5.55%;
+		--border: 0 0% 64.62%;
+		--input: 0 0% 60%;
+		--primary: 47.55 100% 50%;
+		--primary-foreground: 0 0% 5%;
+		--secondary: 0 0% 90%;
+		--secondary-foreground: 0 0% 5%;
+		--accent: 228.68 58.89% 41.64%;
+		--accent-foreground: 0 0% 100%;
+		--destructive: 15 93% 42%;
+		--destructive-foreground: 0 0% 100%;
+		--ring: 268.24 100% 50%;
+		--chart-1: 47.55 100% 50%;
+		--chart-2: 0 0% 90%;
+		--chart-3: 228.68 58.89% 41.64%;
+		--chart-4: 0 0% 93%;
+		--chart-5: 47.55 103% 50%;
+		--radius: 0.5rem;
+	}
+
+	.dark {
+		--background: 0 45% 2%;
+		--foreground: 0 38% 100%;
+		--muted: 0 17% 12%;
+		--muted-foreground: 0 7% 64%;
+		--popover: 0 45% 3%;
+		--popover-foreground: 0 0% 100%;
+		--card: 0 45% 3%;
+		--card-foreground: 0 0% 100%;
+		--border: 0 11% 14%;
+		--input: 0 11% 14%;
+		--primary: 0 0% 65%;
+		--primary-foreground: 0 0% 5%;
+		--secondary: 0 0% 65%;
+		--secondary-foreground: 0 0% 5%;
+		--accent: 0 0% 65%;
+		--accent-foreground: 0 0% 5%;
+		--destructive: 15 93% 58%;
+		--destructive-foreground: 0 0% 0%;
+		--ring: 0 0% 65%;
+		--chart-1: 0 0% 65%;
+		--chart-2: 0 0% 65%;
+		--chart-3: 0 0% 65%;
+		--chart-4: 0 0% 68%;
+		--chart-5: 0 3% 65%;
+	}
+}
