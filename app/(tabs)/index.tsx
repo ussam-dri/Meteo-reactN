@@ -1,54 +1,65 @@
-import { Image, StyleSheet, Platform } from 'react-native';
-
-import { HelloWave } from '@/components/HelloWave';
+// import { Button } from '@/components/Button';
 import ParallaxScrollView from '@/components/ParallaxScrollView';
-import { ThemedText } from '@/components/ThemedText';
 import { ThemedView } from '@/components/ThemedView';
-
+import { firestore } from "@/database/fire_base";
+import { collection, getDocs, } from "firebase/firestore";
+import { useEffect, useState } from 'react';
+import { Image, StyleSheet, Text, TextInput, TouchableOpacity } from 'react-native';
+type Color = {
+  id: string;
+  name: string;
+  hex: string;
+}
 export default function HomeScreen() {
+  const [colors, setColors] = useState<Array<Color>>([]);
+  const [name, setName] = useState<string>("");
+  async function fetchAllDocuments() {
+    const collectionRef = collection(firestore, "colors");
+    const querySnapshot = await getDocs(collectionRef);
+
+    const documents = querySnapshot.docs.map(doc => ({
+      id: doc.id, // Document ID
+      ...doc.data(), // Document Data
+    })) as Color[];
+
+    setColors(documents);
+    return documents;
+  }
+
+  useEffect(() => {
+    fetchAllDocuments()
+  }, [])
+  useEffect(() => {
+    console.log("rerender")
+  }, [])
   return (
     <ParallaxScrollView
       headerBackgroundColor={{ light: '#A1CEDC', dark: '#1D3D47' }}
       headerImage={
-        <Image
-          source={require('@/assets/images/partial-react-logo.png')}
-          style={styles.reactLogo}
-        />
+        <TouchableOpacity
+          style={styles.reactLogo}>
+          <Image
+            source={require('@/assets/images/partial-react-logo.png')}
+          />
+        </TouchableOpacity>
       }>
-      <ThemedView style={styles.titleContainer}>
-        <ThemedText type="title">Welcome!</ThemedText>
-        <HelloWave />
-      </ThemedView>
-      <ThemedView style={styles.stepContainer}>
-        <ThemedText type="subtitle">Step 1: Try it</ThemedText>
-        <ThemedText>
-          Edit <ThemedText type="defaultSemiBold">app/(tabs)/index.tsx</ThemedText> to see changes.
-          Press{' '}
-          <ThemedText type="defaultSemiBold">
-            {Platform.select({
-              ios: 'cmd + d',
-              android: 'cmd + m',
-              web: 'F12'
-            })}
-          </ThemedText>{' '}
-          to open developer tools.
-        </ThemedText>
-      </ThemedView>
-      <ThemedView style={styles.stepContainer}>
-        <ThemedText type="subtitle">Step 2: Explore</ThemedText>
-        <ThemedText>
-          Tap the Explore tab to learn more about what's included in this starter app.
-        </ThemedText>
-      </ThemedView>
-      <ThemedView style={styles.stepContainer}>
-        <ThemedText type="subtitle">Step 3: Get a fresh start</ThemedText>
-        <ThemedText>
-          When you're ready, run{' '}
-          <ThemedText type="defaultSemiBold">npm run reset-project</ThemedText> to get a fresh{' '}
-          <ThemedText type="defaultSemiBold">app</ThemedText> directory. This will move the current{' '}
-          <ThemedText type="defaultSemiBold">app</ThemedText> to{' '}
-          <ThemedText type="defaultSemiBold">app-example</ThemedText>.
-        </ThemedText>
+      <ThemedView>
+        {/* <Button label='hasan'>anass</Button> */}
+        <TextInput
+          onChangeText={setName}
+          style={{
+            padding: 20
+          }}
+          placeholder='name' />
+        <Text style={{
+          fontSize: 30
+        }}>{name}</Text>
+        {colors.sort((a, b) => {
+          return Math.random() - 0.5
+        }).map(color => (<Text key={color.id} style={{
+          color: color.hex,
+          fontSize: 30
+        }}>{color.name}</Text>))}
       </ThemedView>
     </ParallaxScrollView>
   );
