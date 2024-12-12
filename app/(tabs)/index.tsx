@@ -1,10 +1,10 @@
-// import { Button } from '@/components/Button';
-import ParallaxScrollView from '@/components/ParallaxScrollView';
+import { Button } from '@/components/Button';
 import { ThemedView } from '@/components/ThemedView';
 import { firestore } from "@/database/fire_base";
 import { collection, getDocs, } from "firebase/firestore";
 import { useEffect, useState } from 'react';
-import { Image, StyleSheet, Text, TextInput, TouchableOpacity } from 'react-native';
+import { ScrollView, StyleSheet } from 'react-native';
+import { SafeAreaView } from 'react-native-safe-area-context';
 type Color = {
   id: string;
   name: string;
@@ -33,35 +33,13 @@ export default function HomeScreen() {
     console.log("rerender")
   }, [])
   return (
-    <ParallaxScrollView
-      headerBackgroundColor={{ light: '#A1CEDC', dark: '#1D3D47' }}
-      headerImage={
-        <TouchableOpacity
-          style={styles.reactLogo}>
-          <Image
-            source={require('@/assets/images/partial-react-logo.png')}
-          />
-        </TouchableOpacity>
-      }>
-      <ThemedView>
-        {/* <Button label='hasan'>anass</Button> */}
-        <TextInput
-          onChangeText={setName}
-          style={{
-            padding: 20
-          }}
-          placeholder='name' />
-        <Text style={{
-          fontSize: 30
-        }}>{name}</Text>
-        {colors.sort((a, b) => {
-          return Math.random() - 0.5
-        }).map(color => (<Text key={color.id} style={{
-          color: color.hex,
-          fontSize: 30
-        }}>{color.name}</Text>))}
-      </ThemedView>
-    </ParallaxScrollView>
+    <SafeAreaView>
+      <ScrollView>
+        <ThemedView>
+          <Button label='click me' variant="destructive" size="sm" />
+        </ThemedView>
+      </ScrollView>
+    </SafeAreaView>
   );
 }
 
