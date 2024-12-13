@@ -13,6 +13,7 @@ export default function TabLayout() {
 
   return (
     <Tabs
+      initialRouteName='login'
       screenOptions={{
         tabBarActiveTintColor: Colors[colorScheme ?? 'light'].tint,
         headerShown: false,
@@ -27,9 +28,17 @@ export default function TabLayout() {
         }),
       }}>
       <Tabs.Screen
+        name="login"
+        options={{
+          title: 'Login',
+          href: null,
+        }}
+      />
+      <Tabs.Screen
         name="index"
         options={{
           title: 'Home',
+          href: null,
           tabBarIcon: ({ color }) => <IconSymbol size={28} name="house.fill" color={color} />,
         }}
       />
