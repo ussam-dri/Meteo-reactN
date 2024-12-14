@@ -47,7 +47,7 @@ export default function LoginScreen() {
         </View>
         <View className="flex flex-row items-center justify-center mt-4">
           <Text className="text-center text-gray-500 dark:text-white text-xl">Don't have an account? </Text>
-          <Link href="/register" className="text-accent font-bold text-xl">Sign Up</Link>
+          <Link href="/register" className="text-primary font-bold text-xl">Sign Up</Link>
         </View>
       </View>
     </ParallaxScrollView>
