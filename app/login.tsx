@@ -30,20 +30,20 @@ export default function LoginScreen() {
           <Input placeholder="password" className="text-foreground" placeholderTextColor="gray" />
         </View>
         <View className="mt-4">
-          <AppButton variant="primary">Login</AppButton>
+          <AppButton disabled={true} variant="primary">Login</AppButton>
         </View>
         <Separator text="Or" />
         <View className="gap-4">
-          <AppButton variant="outline" className="rounded-full flex flex-row gap-4">
+          <AppButton variant="outline" className="rounded-full flex flex-row gap-4 outline-btn">
             <Image source={GoogleIcon} width={40} height={40} />
-            <Text className="text-foreground dark:text-primary-foreground">Continue With Google</Text>
+            <Text className="text-foreground">Continue With Google</Text>
           </AppButton>
-          <AppButton variant="outline" className="rounded-full flex flex-row gap-4">
+          <AppButton variant="outline" className="rounded-full flex flex-row gap-4 outline-btn">
             <Image source={FacebookIcon} width={40} height={40} />
-            <Text className="text-foreground dark:text-primary-foreground">Continue With Facebook</Text>
+            <Text className="text-foreground">Continue With Facebook</Text>
           </AppButton>
         </View>
-        <View className="flex flex-row items-center justify-center mt-4">
+        <View className="flex flex-row items-center justify-center mt-8">
           <Text className="text-center text-gray-500 dark:text-white text-xl">Don't have an account? </Text>
           <Link href="/register" className="text-primary font-bold text-xl">Sign Up</Link>
         </View>
