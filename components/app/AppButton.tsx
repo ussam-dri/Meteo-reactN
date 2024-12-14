@@ -7,9 +7,14 @@ type ButtonProps = React.ComponentPropsWithoutRef<typeof Pressable> &
   VariantProps<typeof buttonVariants>;
 
 export function AppButton({ children, ...props }: React.PropsWithChildren<ButtonProps>) {
-  return <Button {...props}>
-    <Text>
-      {children}
-    </Text>
-  </Button>
+  return <>
+    <Button {...props}>
+      {typeof children == "string" ?
+        <Text>
+          {children}
+        </Text> :
+        children
+      }
+    </Button>
+  </>
 }

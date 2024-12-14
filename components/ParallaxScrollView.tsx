@@ -1,5 +1,5 @@
 import type { PropsWithChildren, ReactElement } from 'react';
-import { StyleSheet } from 'react-native';
+import { StyleSheet, View, ViewProps } from 'react-native';
 import Animated, {
   interpolate,
   useAnimatedRef,
@@ -7,24 +7,23 @@ import Animated, {
   useScrollViewOffset,
 } from 'react-native-reanimated';
 
-import { ThemedView } from '@/components/ThemedView';
 import { useBottomTabOverflow } from '@/components/ui/TabBarBackground';
-import { useColorScheme } from '@/hooks/useColorScheme';
 
 
-type Props = PropsWithChildren<{
+type Props = ViewProps & PropsWithChildren<{
   HEADER_HEIGHT?: number;
+  className?: string;
+  contentContainerClassName?: string;
   headerImage: ReactElement;
-  headerBackgroundColor: { dark: string; light: string };
 }>;
 
 export default function ParallaxScrollView({
   HEADER_HEIGHT = 250,
   children,
+  className,
+  contentContainerClassName,
   headerImage,
-  headerBackgroundColor,
 }: Props) {
-  const colorScheme = useColorScheme() ?? 'light';
   const scrollRef = useAnimatedRef<Animated.ScrollView>();
   const scrollOffset = useScrollViewOffset(scrollRef);
   const bottom = useBottomTabOverflow();
@@ -46,7 +45,7 @@ export default function ParallaxScrollView({
   });
 
   return (
-    <ThemedView style={styles.container}>
+    <View style={styles.container} className={className}>
       <Animated.ScrollView
         ref={scrollRef}
         scrollEventThrottle={16}
@@ -55,15 +54,17 @@ export default function ParallaxScrollView({
         <Animated.View
           style={[
             styles.header,
-            { height: HEADER_HEIGHT },
-            { backgroundColor: headerBackgroundColor[colorScheme] },
+            {
+              height: HEADER_HEIGHT,
+              backgroundColor: "transparent"
+            },
             headerAnimatedStyle,
           ]}>
           {headerImage}
         </Animated.View>
-        <ThemedView style={styles.content}>{children}</ThemedView>
+        <View style={styles.content} className={contentContainerClassName}>{children}</View>
       </Animated.ScrollView>
-    </ThemedView>
+    </View>
   );
 }
 

@@ -1,4 +1,4 @@
-import { Text, type TextProps, StyleSheet } from 'react-native';
+import { StyleSheet, Text, type TextProps } from 'react-native';
 
 import { useThemeColor } from '@/hooks/useThemeColor';
 
@@ -19,6 +19,7 @@ export function ThemedText({
 
   return (
     <Text
+      className={rest.className}
       style={[
         { color },
         type === 'default' ? styles.default : undefined,
