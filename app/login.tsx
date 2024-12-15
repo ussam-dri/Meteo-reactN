@@ -6,7 +6,7 @@ import { AppButton } from "@/components/app/AppButton";
 import { Input } from "@/components/Input";
 import ParallaxScrollView from '@/components/ParallaxScrollView';
 import Separator from '@/components/separator';
-import { Link } from "expo-router";
+import { Link, useRouter } from "expo-router";
 import { ColorSchemeName, Image, Text, useColorScheme, View } from "react-native";
 
 function BgImageComponent() {
@@ -14,6 +14,7 @@ function BgImageComponent() {
   return <Image source={theme === "dark" ? BgImageDark : BgImageLight} style={{ width: '100%', height: 300 }} />;
 }
 export default function LoginScreen() {
+  const router = useRouter();
   return (
     <ParallaxScrollView
       HEADER_HEIGHT={300}
@@ -30,7 +31,9 @@ export default function LoginScreen() {
           <Input placeholder="password" className="text-foreground" placeholderTextColor="gray" />
         </View>
         <View className="mt-4">
-          <AppButton disabled={true} variant="primary">Login</AppButton>
+          <AppButton onPress={() => {
+            router.navigate("/home");
+          }} variant="primary">Login</AppButton>
         </View>
         <Separator text="Or" />
         <View className="gap-4">
